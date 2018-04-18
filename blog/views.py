@@ -1,6 +1,11 @@
 from django.shortcuts import render
 from django.utils import timezone # 현재 시간을 알기 위해 timezone 모듈을 불러옴
 from .models import Post # models.py 파일에 정의된 모델 가져오기, ‘.’은 현재 디렉토리를 의미
+from django.shortcuts import render, get_object_or_404
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_list(request):
     # 글 목록을 게시일 published_date 기준으로 정렬
